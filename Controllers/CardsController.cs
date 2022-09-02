@@ -32,7 +32,7 @@ namespace TodoApi.Controllers
         }
 
         // GET: api/Cards/5
-        [HttpGet("{id}")]
+        [HttpGet("getByUser/{id}")]
         public async Task<ActionResult<List<Card>>> GetCard(int id)
         {
           if (_context.Cards == null)

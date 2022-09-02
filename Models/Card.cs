@@ -13,7 +13,7 @@ namespace TodoApi.Models
         [StringLength(50)]
         public string Category { get; set; } = null!;
         public string? DueTime { get; set; }
-        [StringLength(5)]
+        [StringLength(20)]
         public string EstimateCount { get; set; } = null!;
         [StringLength(20)]
         public string EstimateUnit { get; set; } = null!;
