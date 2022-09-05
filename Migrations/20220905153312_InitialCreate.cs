@@ -12,9 +12,9 @@ namespace TodoApi.Migrations
                 name: "Statuses",
                 columns: table => new
                 {
-                    StatusId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    StatusId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -25,10 +25,10 @@ namespace TodoApi.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Email = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
+                    UserId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Email = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
+                    Password = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -39,28 +39,28 @@ namespace TodoApi.Migrations
                 name: "Cards",
                 columns: table => new
                 {
-                    CardId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Category = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    DueTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EstimateCount = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: false),
-                    EstimateUnit = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    Importance = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
-                    StatusId = table.Column<int>(type: "int", maxLength: 20, nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false)
+                    CardId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Title = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
+                    Category = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
+                    DueTime = table.Column<string>(type: "TEXT", nullable: true),
+                    EstimateCount = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
+                    EstimateUnit = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
+                    Importance = table.Column<string>(type: "TEXT", maxLength: 20, nullable: true),
+                    StatusId = table.Column<int>(type: "INTEGER", nullable: false),
+                    UserId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Cards", x => x.CardId);
                     table.ForeignKey(
-                        name: "FK_Cards_Statuses_StatusId",
+                        name: "FK_Status_Card",
                         column: x => x.StatusId,
                         principalTable: "Statuses",
                         principalColumn: "StatusId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Cards_Users_UserId",
+                        name: "FK_User_Card",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "UserId",

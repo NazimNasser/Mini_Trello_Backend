@@ -8,8 +8,10 @@ var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 // Add services to the container.
 
 builder.Services.AddControllers();
-builder.Services.AddDbContext<Context>(opt =>
-    opt.UseSqlServer(builder.Configuration.GetConnectionString("Context")));
+builder.Services.AddDbContext<Context>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("Context")));
+// builder.Services.AddDbContext<Context>(opt =>
+//     opt.UseSqlServer(builder.Configuration.GetConnectionString("Context")));
 // builder.Services.AddDbContext<Context>(opt =>
 //     opt.UseInMemoryDatabase("CardList"));
 
